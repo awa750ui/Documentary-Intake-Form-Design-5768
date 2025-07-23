@@ -150,13 +150,13 @@ const IntakeForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-gray-800 rounded-2xl p-8 max-w-md w-full text-center border border-gray-700"
+          className="bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 max-w-md w-full text-center border border-gray-700/50 shadow-xl"
         >
-          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
             <SafeIcon icon={FiCheck} className="text-white text-2xl" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-4">Thank You!</h2>
@@ -169,7 +169,7 @@ const IntakeForm = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -177,7 +177,9 @@ const IntakeForm = () => {
           className="text-center mb-12"
         >
           <div className="flex items-center justify-center mb-6">
-            <SafeIcon icon={FiFilm} className="text-blue-400 text-4xl mr-3" />
+            <div className="bg-blue-500/10 p-3 rounded-full mr-3">
+              <SafeIcon icon={FiFilm} className="text-blue-400 text-4xl" />
+            </div>
             <h1 className="text-4xl font-bold text-white">
               Angus Ashton Film
             </h1>
@@ -195,7 +197,7 @@ const IntakeForm = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           onSubmit={handleSubmit}
-          className="bg-gray-800 rounded-2xl p-8 border border-gray-700 shadow-2xl"
+          className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 shadow-2xl"
         >
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -208,7 +210,7 @@ const IntakeForm = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                  className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                   placeholder="Enter your full name"
                 />
               </FormField>
@@ -222,7 +224,7 @@ const IntakeForm = () => {
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                  className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                   placeholder="your@email.com"
                 />
               </FormField>
@@ -246,7 +248,7 @@ const IntakeForm = () => {
                 value={formData.additionalContext}
                 onChange={(e) => handleInputChange('additionalContext', e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
                 placeholder="Provide any additional context about your goals..."
               />
             </FormField>
@@ -260,7 +262,7 @@ const IntakeForm = () => {
                 type="text"
                 value={formData.storyMessage}
                 onChange={(e) => handleInputChange('storyMessage', e.target.value)}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                 placeholder="Describe your story in one clear sentence..."
               />
             </FormField>
@@ -274,7 +276,7 @@ const IntakeForm = () => {
                 type="text"
                 value={formData.mainTheme}
                 onChange={(e) => handleInputChange('mainTheme', e.target.value)}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                 placeholder="e.g., Environmental conservation, Personal journey, Business story..."
               />
             </FormField>
@@ -286,7 +288,7 @@ const IntakeForm = () => {
                 value={formData.keyPeople}
                 onChange={(e) => handleInputChange('keyPeople', e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
                 placeholder="Describe the main people or characters in your documentary..."
               />
             </FormField>
@@ -308,7 +310,7 @@ const IntakeForm = () => {
                   value={formData.scriptDescription}
                   onChange={(e) => handleInputChange('scriptDescription', e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
+                  className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
                   placeholder="Describe your existing script or outline..."
                 />
               </FormField>
@@ -334,7 +336,7 @@ const IntakeForm = () => {
                 value={formData.audienceAction}
                 onChange={(e) => handleInputChange('audienceAction', e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
                 placeholder="Describe the desired impact on your audience..."
               />
             </FormField>
@@ -369,7 +371,7 @@ const IntakeForm = () => {
                   type="text"
                   value={formData.idealLength}
                   onChange={(e) => handleInputChange('idealLength', e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                  className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                   placeholder="e.g., 5-10 minutes, 30 minutes, 1 hour"
                 />
               </FormField>
@@ -381,7 +383,7 @@ const IntakeForm = () => {
                   type="date"
                   value={formData.deadline}
                   onChange={(e) => handleInputChange('deadline', e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                  className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                 />
               </FormField>
             </div>
@@ -402,7 +404,7 @@ const IntakeForm = () => {
                 value={formData.visualReferences}
                 onChange={(e) => handleInputChange('visualReferences', e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
                 placeholder="Share any links, references, or describe the visual style you're envisioning..."
               />
             </FormField>
@@ -414,7 +416,7 @@ const IntakeForm = () => {
                 value={formData.challenges}
                 onChange={(e) => handleInputChange('challenges', e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all resize-none"
                 placeholder="Describe any potential challenges or sensitive topics..."
               />
             </FormField>
@@ -428,7 +430,7 @@ const IntakeForm = () => {
                 type="text"
                 value={formData.pointOfContact}
                 onChange={(e) => handleInputChange('pointOfContact', e.target.value)}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
+                className="w-full px-4 py-3 bg-gray-700/80 border border-gray-600/80 rounded-lg text-white placeholder-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all"
                 placeholder="Who should we contact regarding this project?"
               />
             </FormField>
@@ -443,13 +445,13 @@ const IntakeForm = () => {
             />
           </div>
 
-          <div className="mt-10 pt-8 border-t border-gray-700">
+          <div className="mt-10 pt-8 border-t border-gray-700/50">
             <motion.button
               type="submit"
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 text-lg"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-500 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 text-lg shadow-lg"
             >
               {isSubmitting ? (
                 <>
