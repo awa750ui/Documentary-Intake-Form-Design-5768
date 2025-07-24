@@ -1,8 +1,8 @@
 import emailjs from 'emailjs-com';
 
-const SERVICE_ID = 'your_service_id';
-const TEMPLATE_ID = 'your_template_id';
-const USER_ID = 'your_user_id';
+const SERVICE_ID = 'service_aaf';
+const TEMPLATE_ID = 'documentary-intake';
+const USER_ID = 'VM85hk8cpaGMF9Qb4';
 
 export const sendEmail = async (formData) => {
   try {

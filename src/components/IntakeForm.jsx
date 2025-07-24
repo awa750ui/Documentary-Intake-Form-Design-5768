@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // <-- ENSURE useEffect is imported
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 import FormField from './FormField';
 import CheckboxGroup from './CheckboxGroup';
 import RadioGroup from './RadioGroup';
-import { submitToSupabase } from '../services/supabase';
+import { submitToSupabase, supabase } from '../services/supabase'; // <-- IMPORTANT: Import 'supabase' here
 import { sendEmail } from '../services/emailjs';
 
 const { FiSend, FiCheck, FiCamera, FiFilm } = FiIcons;
@@ -41,6 +41,35 @@ const IntakeForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // --- START: ADDED CODE FOR DIAGNOSTIC READ TEST ---
+  useEffect(() => {
+    const testRead = async () => {
+      console.log('--- Supabase Read Test Initiated ---');
+      try {
+        const { data, error } = await supabase
+          .from('documentary_intake') // Ensure this is the correct table name
+          .select('*')
+          .limit(1); // Just try to get one record
+
+        if (error) {
+          console.error('Supabase Read Test Error:', error);
+        } else {
+          console.log('Supabase Read Test Success! Data:', data);
+          if (data.length === 0) {
+              console.log('Supabase Read Test: Table is empty, which is expected for a fresh setup.');
+          }
+        }
+      } catch (err) {
+        console.error('Supabase Read Test Caught Exception:', err);
+      }
+      console.log('--- Supabase Read Test Finished ---');
+    };
+
+    testRead();
+  }, []); // Empty dependency array means this runs once on component mount
+  // --- END: ADDED CODE FOR DIAGNOSTIC READ TEST ---
+
 
   const primaryGoalOptions = [
     'Raise awareness',
@@ -131,14 +160,53 @@ const IntakeForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
     try {
-      await submitToSupabase(formData);
-      await sendEmail(formData);
+      // Prepare data for Supabase, especially for the 'deadline' and snake_case columns
+      const dataToSend = { ...formData };
+
+      // Handle deadline: send null if empty string
+      if (dataToSend.deadline === '') {
+        dataToSend.deadline = null;
+      }
+
+      const supabaseFormattedData = {
+          name: dataToSend.name,
+          email: dataToSend.email,
+          primary_goal: dataToSend.primaryGoal,
+          primary_goal_other: dataToSend.primaryGoalOther,
+          additional_context: dataToSend.additionalContext,
+          story_message: dataToSend.storyMessage,
+          main_theme: dataToSend.mainTheme,
+          key_people: dataToSend.keyPeople,
+          has_script: dataToSend.hasScript,
+          script_description: dataToSend.scriptDescription,
+          primary_audience: dataToSend.primaryAudience,
+          primary_audience_other: dataToSend.primaryAudienceOther,
+          audience_action: dataToSend.audienceAction,
+          tone_style: dataToSend.toneStyle,
+          tone_style_other: dataToSend.toneStyleOther,
+          primary_platform: dataToSend.primaryPlatform,
+          primary_platform_other: dataToSend.primaryPlatformOther,
+          ideal_length: dataToSend.idealLength,
+          deadline: dataToSend.deadline,
+          production_needs: dataToSend.productionNeeds,
+          visual_references: dataToSend.visualReferences,
+          challenges: dataToSend.challenges,
+          point_of_contact: dataToSend.pointOfContact,
+          involvement: dataToSend.involvement,
+          submitted_at: new Date().toISOString()
+      };
+
+
+      // Pass the prepared data to submitToSupabase
+      await submitToSupabase(supabaseFormattedData);
+      await sendEmail(formData); // Use original formData for email template if needed
+
       setIsSubmitted(true);
     } catch (error) {
       console.error('Submission error:', error);
@@ -178,7 +246,6 @@ const IntakeForm = () => {
         >
           <div className="flex items-center justify-center mb-6">
             <div className="bg-blue-500/10 p-3 rounded-full mr-3">
-              <SafeIcon icon={FiFilm} className="text-blue-400 text-4xl" />
             </div>
             <h1 className="text-4xl font-bold text-white">
               Angus Ashton Film
@@ -188,7 +255,7 @@ const IntakeForm = () => {
             Documentary Project Intake
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Please fill out this form so we can understand your story and goals.
+            Please fill out this form in as much detail as possible <br></br> so we can understand your story and goals.
           </p>
         </motion.div>
 
